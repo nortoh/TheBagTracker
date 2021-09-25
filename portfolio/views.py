@@ -79,6 +79,7 @@ class HomeView(View):
     table_class = PortfolioTable
     template_name = 'home/index.html'
 
+    # Get coin stats before passing to API
     def construct_coin_stats(self, request):
         all_transactions = Transaction.objects.filter(user_id=request.user.id)
         coin_trading_map = dict()
@@ -168,6 +169,7 @@ class TransactionAddView(View):
             )
 
             new_transaction.save()
+            return HttpResponseRedirect('/transactions/')
         return render(request, self.template_name, locals())
 
     def get(self, request):
