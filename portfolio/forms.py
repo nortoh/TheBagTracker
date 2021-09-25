@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Coin
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -22,4 +22,43 @@ class LoginForm(forms.Form):
                 'placeholder': 'Password'
             }
         )
+    )
+
+class TransactionAddForm(forms.Form):
+    print(Coin.objects.all())
+
+    base_pair = forms.ChoiceField(
+        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Username'
+            }
+        )
+    )
+
+    quote_pair = forms.ChoiceField(
+        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Username'
+            }
+        )
+    )
+
+    transaction_date = forms.DateField(
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Username'
+            }
+        )
+    )
+
+    transaction_type = forms.ChoiceField(
+        choices=['BUY', 'SELL']
     )

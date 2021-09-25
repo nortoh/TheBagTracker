@@ -6,7 +6,7 @@ import django_tables2 as tables
 from django_tables2 import SingleTableView
 
 from .models import Transaction, Account
-from .forms import LoginForm
+from .forms import LoginForm, TransactionAddForm
 from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
@@ -15,7 +15,7 @@ class LoginView(View):
     template_name = 'login/index.html'
     form_class = LoginForm
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = self.form_class(request.POST)
 
         if form.is_valid():
@@ -121,6 +121,28 @@ class TransactionsView(SingleTableView):
         # Pull and make contents
         user_transactions = Transaction.objects.filter(user_id=account.user_id)
         transaction_table = TransactionsTable(user_transactions)
+        transaction_table.order_by ='-Date'
+
+        return render(request, self.template_name, locals())
+
+class TransactionAddView(View):
+    template_name = 'transactions/add.html'
+    form_class = TransactionAddForm
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            pass
+
+        return render(request, self.template_name, locals())
+
+    def get(self, request):
+        form = TransactionAddForm()
+        
+        if not request.user.is_authenticated:
+            print('User is already logged in, redirecting to /')
+            return HttpResponseRedirect('/')
 
         return render(request, self.template_name, locals())
 
