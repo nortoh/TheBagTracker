@@ -7,6 +7,11 @@ class Coin(models.Model):
     def __str__(self):
         return "{}".format(self.ticker)
 
+
+class Wallet(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=20, verbose_name="Wallet")
+
 class Transaction(models.Model):
     # transaction_id = models.IntegerField(primary_key=True)
     id = models.IntegerField(primary_key=True)
@@ -19,5 +24,5 @@ class Transaction(models.Model):
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self):
-        return "{}".format('I am a transaction weeeeeeeeeeeeeeeeee')
+        return "{id}:{date}:{inserted_date}:{ticker}:{transaction_type}:{transaction_amount}:{transaction_fee}".format('')
 

@@ -8,6 +8,9 @@ class CoinAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id', 'date', 'inserted_date', 'ticker', 'transaction_type', 'transaction_amount', 'transaction_fee', )
     list_filter = ('ticker',)
+    search_fields = ('ticker',)
+    ordering = ('id',)
+
 
 admin.site.register(Coin, CoinAdmin)
 admin.site.register(Transaction, TransactionAdmin)

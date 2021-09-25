@@ -19,6 +19,9 @@ from portfolio import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('transactions/', views.TransactionsView.as_view(), name='transactions'),
+    path('portfolio/', views.PortfolioView.as_view(), name='portfolio'),
+    path('sign_in/', views.SignInView.as_view(), name='sign_in'),
     path('', views.Index.as_view() , name='index')
 
 ]
