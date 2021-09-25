@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Coin, Transaction, Account
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 class CoinAdmin(admin.ModelAdmin):
@@ -11,11 +12,53 @@ class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('base_pair', 'quote_pair')
     ordering = ('id',)
 
-class AccountAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'username')
-    list_filter = ('username',)
-    search_fields = ('username',)
-    ordering = ('user_id',)
+class AccountAdmin(UserAdmin):
+    list_display = (
+        'id','username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active','date_of_birth'
+    )
+
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'password')
+        }),
+        ('Personal info', {
+            'fields': ('first_name', 'last_name', 'email')
+        }),
+        ('Permissions', {
+            'fields': (
+                'is_active', 'is_staff', 'is_superuser',
+                'groups', 'user_permissions'
+            )
+        }),
+        ('Important dates', {
+            'fields': ('last_login', 'date_joined')
+        })
+    )
+
+    add_fieldsets = (
+        (None, {
+            'fields': ('username')
+        }),
+        ('Personal info', {
+            'fields': ('first_name', 'last_name', 'email')
+        }),
+        ('Permissions', {
+            'fields': (
+                'is_active', 'is_staff', 'is_superuser',
+                'groups', 'user_permissions'
+            )
+        }),
+        ('Important dates', {
+            'fields': ('last_login', 'date_joined')
+        }),
+        ('Additional info', {
+            'fields': ('is_student', 'is_teacher', 'mailing_address')
+        })
+    )
+    # list_display = ('id', 'username')
+    # list_filter = ('username',)
+    # search_fields = ('username',)
+    # ordering = ('id',)
 
 
 
