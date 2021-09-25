@@ -31,7 +31,7 @@ class TransactionAddForm(forms.Form):
         choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'id': 'floatingInput',
                 'placeholder': 'Username'
             }
@@ -42,23 +42,50 @@ class TransactionAddForm(forms.Form):
         choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'id': 'floatingInput',
                 'placeholder': 'Username'
             }
         )
     )
 
-    transaction_date = forms.DateField(
-        widget=forms.Select(
+    transaction_date = forms.CharField(
+        widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
                 'id': 'floatingInput',
-                'placeholder': 'Username'
+                'placeholder': '12/25/1996'
+            }
+        )
+    )
+
+    transaction_amount = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': '$9000'
+            }
+        )
+    )
+
+    transaction_fee = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': '$9000'
             }
         )
     )
 
     transaction_type = forms.ChoiceField(
-        choices=['BUY', 'SELL']
+        choices=[('BUY', 'Buy'), ('SELL', 'Sell')],
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'id': 'floatingInput',
+                'placeholder': 'Username'
+            }
+        )
     )

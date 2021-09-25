@@ -133,7 +133,18 @@ class TransactionAddView(View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            pass
+
+            account = Account.objects.get(
+                user_id=request.user.id
+            )
+
+            base_pair = request.POST['base_pair']
+            quote_pair = request.POST['quote_pair']
+            transaction_date = request.POST['transaction_date']
+            transaction_amount = request.POST['transaction_amount']
+            transaction_type = request.POST['transaction_type']
+            transaction_fee = request.POST['transaction_fee']
+
 
         return render(request, self.template_name, locals())
 
