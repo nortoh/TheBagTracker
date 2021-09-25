@@ -31,7 +31,7 @@ class LoginView(View):
 
                 # Create the account object if we do not have
                 Account.objects.get_or_create(
-                    user_id=user.id,
+                    id=user.id,
                     username=username
                 )
                 
@@ -90,13 +90,13 @@ class HomeView(View):
         nbar = 'home'
 
         account = Account.objects.get(
-            user_id=request.user.id
+            id=request.user.id
         )
 
         self.construct_coin_stats(request)
 
         # Pull and make contents
-        user_transactions = Transaction.objects.filter(user_id=account.user_id)
+        user_transactions = Transaction.objects.filter(user_id=account.id)
         portfolio_table = PortfolioTable(user_transactions)
 
         return render(request, self.template_name, locals())
