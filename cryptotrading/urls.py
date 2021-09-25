@@ -21,7 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('transactions/', views.TransactionsView.as_view(), name='transactions'),
     path('portfolio/', views.PortfolioView.as_view(), name='portfolio'),
-    path('sign_in/', views.SignInView.as_view(), name='sign_in'),
+    path('home/', views.HomeView.as_view(), name='home'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
     path('', views.Index.as_view() , name='index')
 
 ]
