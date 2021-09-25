@@ -7,7 +7,7 @@ from django_tables2 import SingleTableView
 
 from .models import Transaction, Account
 from .forms import LoginForm
-from .tables import TransactionsTable
+from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 
@@ -65,10 +65,40 @@ class LogoutView(View):
         return render(request, self.template_name, locals())
 
 class HomeView(View):
+    model = Transaction
+    table_class = PortfolioTable
     template_name = 'home/index.html'
+    
+    def construct_coin_stats(self, request):
+        all_transactions = Transaction.objects.filter(user_id=request.user.id)
+        coin_trading_map = dict()
+
+        for transaction in all_transactions:
+            base_pair = transaction.base_pair
+            quote_pair = transaction.quote_pair
+            transaction_type = transaction.transaction_type
+
+            print(f'Base: {base_pair} Quote: {quote_pair} TranType: {transaction_type}')
+        
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            print('Someone is not logged in!')
+            print('No user is logged in, redirect to /login')
+            return HttpResponseRedirect('/login/')
+        
         nbar = 'home'
+
+        account = Account.objects.get(
+            user_id=request.user.id
+        )
+
+        self.construct_coin_stats(request)
+
+        # Pull and make contents
+        user_transactions = Transaction.objects.filter(user_id=account.user_id)
+        portfolio_table = PortfolioTable(user_transactions)
+
         return render(request, self.template_name, locals())
 
 class TransactionsView(SingleTableView):
@@ -84,11 +114,11 @@ class TransactionsView(SingleTableView):
         
         nbar = 'transactions'
 
-        # Create the account object if we do not have
         account = Account.objects.get(
             user_id=request.user.id
         )
         
+        # Pull and make contents
         user_transactions = Transaction.objects.filter(user_id=account.user_id)
         transaction_table = TransactionsTable(user_transactions)
 
@@ -98,9 +128,8 @@ class PortfolioView(View):
     template_name = 'portfolio/index.html'
 
     def get(self, request):
-
         nbar = 'Portfolio'
-        # Data variables
+
         portfolio_data = Transaction.objects.filter(ticker='BTC')
         
         # Template variables

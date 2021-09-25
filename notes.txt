@@ -28,6 +28,8 @@ I place a transaction
 I view transaction 9/28/21 - BTC $50000
 	Profit: (10 * $50000) - ($424835.00) = (Amount * Curr_price) - (Price_Bought * Amount)
 
+When constructing a portfolio out of the transactions of the user, what is the best format to count each trade while converting each base/quote pair.
+
 When creating or editing models,
 run python manage.py makemigrations
 run python manage.py migrate

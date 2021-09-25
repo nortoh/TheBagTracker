@@ -28,5 +28,5 @@ class Transaction(models.Model):
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self):
-        return "Something soon"
+        return f'ID: {self.id} Date: {self.date} Base: {self.base_pair} Quote: {self.quote_pair} User: {self.user_id}'
 
