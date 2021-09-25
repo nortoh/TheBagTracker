@@ -26,10 +26,10 @@ class LoginForm(forms.Form):
 
 class TransactionAddForm(forms.Form):
     base_pair = forms.ChoiceField(
-        #choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'id': 'floatingInput',
                 'placeholder': 'Username'
             }
@@ -37,10 +37,10 @@ class TransactionAddForm(forms.Form):
     )
 
     quote_pair = forms.ChoiceField(
-        #choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'id': 'floatingInput',
                 'placeholder': 'Username'
             }
@@ -48,15 +48,42 @@ class TransactionAddForm(forms.Form):
     )
 
     transaction_date = forms.DateField(
-        widget=forms.Select(
+        widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
                 'id': 'floatingInput',
-                'placeholder': 'Username'
+                'placeholder': '12/25/1996'
+            }
+        )
+    )
+
+    transaction_amount = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': '$9000'
+            }
+        )
+    )
+
+    transaction_fee = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': '$9000'
             }
         )
     )
 
     transaction_type = forms.ChoiceField(
-        choices=['BUY', 'SELL']
+        choices=[('BUY', 'Buy'), ('SELL', 'Sell')],
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'id': 'floatingInput',
+                'placeholder': 'Username'
+            }
+        )
     )

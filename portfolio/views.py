@@ -4,8 +4,11 @@ from django.views.generic import TemplateView
 from django.views import View
 import django_tables2 as tables
 from django_tables2 import SingleTableView
+from websocket import create_connection, WebSocket
+import socket
+import json
 
-from .models import Transaction, Account
+from .models import Transaction, Account, Coin
 from .forms import LoginForm, TransactionAddForm
 from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
@@ -31,7 +34,7 @@ class LoginView(View):
 
                 # Create the account object if we do not have
                 Account.objects.get_or_create(
-                    user_id=user.id,
+                    id=user.id,
                     username=username
                 )
                 
@@ -64,11 +67,18 @@ class LogoutView(View):
         
         return render(request, self.template_name, locals())
 
+class ApiWebSocket(WebSocket):
+    def recv_frame(self):
+        frame = super().recv_frame()
+        print('yay! I got this frame: ', frame)
+        return frame
+
+
 class HomeView(View):
     model = Transaction
     table_class = PortfolioTable
     template_name = 'home/index.html'
-    
+
     def construct_coin_stats(self, request):
         all_transactions = Transaction.objects.filter(user_id=request.user.id)
         coin_trading_map = dict()
@@ -77,9 +87,9 @@ class HomeView(View):
             base_pair = transaction.base_pair
             quote_pair = transaction.quote_pair
             transaction_type = transaction.transaction_type
+            trading_pair = f'{base_pair}-{quote_pair}'
 
-            print(f'Base: {base_pair} Quote: {quote_pair} TranType: {transaction_type}')
-        
+            print(f'TradingPair: {trading_pair} TranType: {transaction_type}')
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -90,13 +100,13 @@ class HomeView(View):
         nbar = 'home'
 
         account = Account.objects.get(
-            user_id=request.user.id
+            id=request.user.id
         )
 
         self.construct_coin_stats(request)
 
         # Pull and make contents
-        user_transactions = Transaction.objects.filter(user_id=account.user_id)
+        user_transactions = Transaction.objects.filter(user_id=account.id)
         portfolio_table = PortfolioTable(user_transactions)
 
         return render(request, self.template_name, locals())
@@ -115,11 +125,11 @@ class TransactionsView(SingleTableView):
         nbar = 'transactions'
 
         account = Account.objects.get(
-            user_id=request.user.id
+            id=request.user.id
         )
         
         # Pull and make contents
-        user_transactions = Transaction.objects.filter(user_id=account.user_id)
+        user_transactions = Transaction.objects.filter(user_id=account.id)
         transaction_table = TransactionsTable(user_transactions)
         transaction_table.order_by ='-Date'
 
@@ -133,13 +143,36 @@ class TransactionAddView(View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            pass
 
+            account = Account.objects.get(
+                id=request.user.id
+            )
+
+            base_pair = request.POST['base_pair']
+            quote_pair = request.POST['quote_pair']
+            # transaction_date = request.POST['transaction_date']
+            transaction_date = datetime.now()
+            transaction_amount = request.POST['transaction_amount']
+            transaction_type = request.POST['transaction_type']
+            transaction_fee = request.POST['transaction_fee']
+
+            new_transaction = Transaction(
+                date=transaction_date,
+                base_pair = Coin.objects.get(ticker=base_pair),
+                quote_pair = Coin.objects.get(ticker=quote_pair),
+                user_id = account,
+                transaction_date=datetime.now(),
+                transaction_type = transaction_type,
+                transaction_amount = transaction_amount,
+                transaction_fee = transaction_fee
+            )
+
+            new_transaction.save()
         return render(request, self.template_name, locals())
 
     def get(self, request):
         form = TransactionAddForm()
-        
+
         if not request.user.is_authenticated:
             print('User is already logged in, redirecting to /')
             return HttpResponseRedirect('/')

@@ -53,22 +53,32 @@
           <!-- Insert Sign In Logo Here -->
           <h1 class="h3 mb-3 fw-normal">Please fill out a transaction</h1>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">{{form.base_pair.label}}</span>
+            <span class="input-group-text" id="basic-addon1">Base Pair</span>
             {{form.base_pair}}
-          
-            <span class="input-group-text" id="basic-addon1">{{form.quote_pair.label}}</span>
+            <span class="input-group-text" id="basic-addon1">Quote Pair</span>
             {{form.quote_pair}}
-
-            {% comment %} <span class="input-group-text" id="basic-addon1">{{form.transaction_type.label}}</span> {% endcomment %}
-            {% comment %} {{form.transaction_type}} {% endcomment %}
-          </div>
-          {% comment %} {% for field in form %}
-          <div class="form-floating">
-            {{ field }} 
-            <label for="floatingInput">{{ field.label }}</label>
           </div>
 
-          {% endfor %} {% endcomment %}
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Transaction Date:</span>
+            {{form.transaction_date}}
+          </div>
+
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1">Transaction Type:</span>
+            {{form.transaction_type}}
+          </div>
+
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1">Transaction Amount:</span>
+            {{form.transaction_amount}}
+          </div>
+
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1">Transaction Fee:</span>
+            {{form.transaction_fee}}
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
         </form>
     </main>
   </div>
