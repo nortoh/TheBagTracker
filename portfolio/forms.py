@@ -25,8 +25,6 @@ class LoginForm(forms.Form):
     )
 
 class TransactionAddForm(forms.Form):
-    print(Coin.objects.all())
-
     base_pair = forms.ChoiceField(
         choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
@@ -49,7 +47,7 @@ class TransactionAddForm(forms.Form):
         )
     )
 
-    transaction_date = forms.CharField(
+    transaction_date = forms.DateField(
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',

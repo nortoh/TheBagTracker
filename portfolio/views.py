@@ -5,7 +5,7 @@ from django.views import View
 import django_tables2 as tables
 from django_tables2 import SingleTableView
 
-from .models import Transaction, Account
+from .models import Transaction, Account, Coin
 from .forms import LoginForm, TransactionAddForm
 from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
@@ -77,8 +77,17 @@ class HomeView(View):
             base_pair = transaction.base_pair
             quote_pair = transaction.quote_pair
             transaction_type = transaction.transaction_type
+            transaction_date = transaction.transaction_date
 
-            print(f'Base: {base_pair} Quote: {quote_pair} TranType: {transaction_type}')
+            print(f'Base: {base_pair} Quote: {quote_pair} TranType: {transaction_type} Date: {transaction_date}')
+
+            if transaction_type == 'BUY':
+                pass
+            elif transaction_type == 'SELL':
+                pass
+            else:
+                print(f'Unknown transaction type: {transaction_type}')
+
         
 
     def get(self, request):
@@ -140,12 +149,24 @@ class TransactionAddView(View):
 
             base_pair = request.POST['base_pair']
             quote_pair = request.POST['quote_pair']
-            transaction_date = request.POST['transaction_date']
+            # transaction_date = request.POST['transaction_date']
+            transaction_date = datetime.now()
             transaction_amount = request.POST['transaction_amount']
             transaction_type = request.POST['transaction_type']
             transaction_fee = request.POST['transaction_fee']
 
+            new_transaction = Transaction(
+                date=transaction_date,
+                transaction_date=datetime.now(),
+                base_pair = Coin.objects.get(ticker=base_pair),
+                quote_pair = Coin.objects.get(ticker=quote_pair),
+                user_id = account,
+                transaction_type = transaction_type,
+                transaction_amount = transaction_amount,
+                transaction_fee = transaction_fee
+            )
 
+            new_transaction.save()
         return render(request, self.template_name, locals())
 
     def get(self, request):
