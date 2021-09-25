@@ -21,7 +21,7 @@ class Transaction(models.Model):
     # transaction_id = models.IntegerField(primary_key=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField(verbose_name='Date')
-    inserted_date = models.DateTimeField(auto_now_add=True, verbose_name='Date Added')
+    transaction_date = models.DateTimeField(auto_now_add=True, verbose_name='Date Added')
     base_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='base_coin_pair')
     quote_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='quote_coin_pair')
     user_id = models.ForeignKey(Account, on_delete=models.CASCADE)

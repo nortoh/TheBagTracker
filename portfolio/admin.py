@@ -7,7 +7,7 @@ class CoinAdmin(admin.ModelAdmin):
     list_display = ('ticker',)
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'inserted_date', 'base_pair', 'quote_pair', 'user_id', 'transaction_type', 'transaction_amount', 'transaction_fee', )
+    list_display = ('id', 'date', 'transaction_date', 'base_pair', 'quote_pair', 'user_id', 'transaction_type', 'transaction_amount', 'transaction_fee', )
     list_filter = ('base_pair', 'quote_pair')
     search_fields = ('base_pair', 'quote_pair')
     ordering = ('id',)
