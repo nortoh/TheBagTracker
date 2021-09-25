@@ -1,0 +1,30 @@
+Home Page
+	- Login
+	- Logout
+	- Register
+Portfolio
+	- Table List Entry
+		- Coin Ticker
+		- Total Coin Amount (dynamically changing)
+		- Transacations[]
+			- Transaction Date - This will determine the worth of the trasaction using historical data
+			- Transaction Type: - Sell or Buy
+			- Transaction Amount - The amount the user had purchased
+			- Transaction Fee
+			- Transaction Market: (Binance, KuCoin, Coinbase, etc) 
+
+
+
+
+
+I place a transaction
+	- 9/25/21
+	- BTC/USD
+	- Buy
+	- 10 BTC - $424835.00 (1 BTC = 42483.50)
+	- $1000
+	- Coinbase
+
+I view transaction 9/28/21 - BTC $50000
+	Profit: (10 * $50000) - ($424835.00) = (Amount * Curr_price) - (Price_Bought * Amount)
+
