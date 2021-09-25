@@ -115,11 +115,11 @@ class TransactionsView(SingleTableView):
         nbar = 'transactions'
 
         account = Account.objects.get(
-            user_id=request.user.id
+            id=request.user.id
         )
         
         # Pull and make contents
-        user_transactions = Transaction.objects.filter(user_id=account.user_id)
+        user_transactions = Transaction.objects.filter(user_id=account.id)
         transaction_table = TransactionsTable(user_transactions)
         transaction_table.order_by ='-Date'
 
