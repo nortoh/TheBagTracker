@@ -25,10 +25,10 @@ class LoginForm(forms.Form):
     )
 
 class TransactionAddForm(forms.Form):
-    print(Coin.objects.all())
+    #print(Coin.objects.all())
 
     base_pair = forms.ChoiceField(
-        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        #choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
                 'class': 'form-control',
@@ -39,7 +39,7 @@ class TransactionAddForm(forms.Form):
     )
 
     quote_pair = forms.ChoiceField(
-        choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
+        #choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
                 'class': 'form-control',
