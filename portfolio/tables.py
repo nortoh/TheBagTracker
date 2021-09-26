@@ -20,6 +20,10 @@ class TransactionsTable(tables.Table):
         fields = ('date', 'base_pair', 'quote_pair', 'transaction_date', 'transaction_type', 'transaction_amount', 'transaction_fee', 'remove')
 
 class PortfolioTable(tables.Table):
+
+    def render_ticker(self, value):
+        return format_html("<b><img width='15' height='15' src='/static/img/coins/{}.png' />&nbsp;{}</b>", value, value)
+
     class Meta:
         model = Transaction
         template_name = 'django_tables2/bootstrap4.html'
