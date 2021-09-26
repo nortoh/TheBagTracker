@@ -138,7 +138,7 @@ class RegisterForm(forms.Form):
             self._errors['password1'] = self.error_class([
                 'Password needs to be between 6 and 16 characters'])
         if (password1 != password2):
-            self._errors['password1'] = self.error_class([
+            self._errors['password2'] = self.error_class([
                 'Password don\'t match'])
         if (result == False):
             self._errors['password1'] = self.error_class([
