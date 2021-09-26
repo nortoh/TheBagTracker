@@ -67,13 +67,6 @@ class LogoutView(View):
         
         return render(request, self.template_name, locals())
 
-class ApiWebSocket(WebSocket):
-    def recv_frame(self):
-        frame = super().recv_frame()
-        print('yay! I got this frame: ', frame)
-        return frame
-
-
 class HomeView(View):
     model = Transaction
     table_class = PortfolioTable
