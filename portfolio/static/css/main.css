@@ -26,6 +26,10 @@ body {
   .text-red {
     color: rgb(255, 131, 131);
   }
+
+  .col-md-9 {
+    width: 100%;
+  }
   
   /*
    * Sidebar
