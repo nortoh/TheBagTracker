@@ -9,6 +9,27 @@ body {
     height: 16px;
     vertical-align: text-bottom;
   }
+
+  .button {
+    background-color: #121212f2; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+
+  .text-green {
+    color: rgb(128, 255, 128);
+  }
+
+  .text-red {
+    color: rgb(255, 131, 131);
+  }
+
+  .col-md-9 {
+    width: 100%;
+  }
   
   /*
    * Sidebar
@@ -74,9 +95,103 @@ body {
    * Navbar
    */
   
-  .navbar {
-    background: #ffffff20;
-    border-radius: 15px;
+   @media only screen and (min-width: 880px) {
+    .navbar {
+      background: #ffffff20;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+    }  
+
+    .navbar-brand {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      font-size: 1rem;
+      background-color: rgba(0, 0, 0, .25);
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+    }
+
+    .navbar-links {
+      flex-direction: row;      
+    }
+
+    .nav-link {
+      transition: none;
+      font-size: x-large;
+   }
+
+   .logo-text { 
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      margin-bottom: 0px;
+      padding-left: 8px;
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+  }
+
+  @media only screen and (max-width: 880px) {
+    .navbar {
+      background: #ffffff20;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }  
+
+    .navbar-brand {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      font-size: 1rem;
+      background-color: rgba(0, 0, 0, .25);
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+      display: flex;
+      justify-content: center;
+      width: 100vw;
+    }
+
+    .navbar-links {
+      flex-direction: column !important; 
+      align-items: center;  
+    }
+    
+    .nav-link {
+      transition: none;
+      font-size: medium;
+      padding: 15px 15px;
+   }
+
+   .logo-text { 
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      margin-bottom: 0px;
+      padding-left: 12px;
+      font-size: xx-large;
+    }
+
+    .menu-button {
+      position: relative;
+      background-color: #ffffff00;
+      border: none;
+      
+    }
+
+    .active {
+      display: none;
+    }
   }
 
   .navbar-dark .navbar-nav .nav-link {
@@ -84,17 +199,10 @@ body {
     transition: none;
   }
 
-  .navbar-brand {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-  }
+ 
   
   .navbar .navbar-toggler {
-    top: .25rem;
-    right: 1rem;
+    top: 4rem;
   }
   
   .navbar .form-control {
@@ -115,7 +223,7 @@ body {
   }
 
   .logo { 
-    width: 75px; 
+    width: 50px; 
     pointer-events: initial; 
   }
 
