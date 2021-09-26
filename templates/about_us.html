@@ -14,6 +14,8 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/main.css" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/833da698be.js" crossorigin="anonymous"></script>
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -48,22 +50,23 @@
   <div class="row">
 
     <main class="col-md-9 col-lg-12 px-md-4 content">
-        <div class="row">
-          <div class="col">
-            <div class="logo-center">
-              <a><img src="{% static 'img/logo.png' %}" class="big-logo" /></a>
-            </div>
-            <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h1 text-center font-weight-bold">About Us</h1>
-            </div>
+      <a href="/" style="font-size: 3em; color: #ffffff90; position: relative; top: 20px;">
+        <i class="fas fa-arrow-circle-left"></i>
+      </a>  
+      <div class="row">
+        <div class="col">
+          <div class="logo-center">
+            <a><img src="{% static 'img/logo.png' %}" class="big-logo" /></a>
+          </div>
+          <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h1 text-center font-weight-bold">About Us</h1>
           </div>
         </div>
-        <div class="container">
-            <p class="">This is going to be something about us.</p>
+      </div>
+      <div class="container" style="margin-left: 3%; margin-right: 3%; margin-top: 1%; max-width: 93%;">
+          <p style="font-size: large;"><a style=" font-size: x-large; font-family: monospace;">The Bag Tracker</a> is an online cryptocurrency portfolio tracker / trading interface created by <u>Christopher Hinchey</u>, <u>Christian "Nortoh" Horton</u>, and <u>Richard Molina</u> in 36 caffeine-fueled hours for ShellHacks 2021's CoinRoutes, Inc. challenge.  </p>
+          <p style="font-size: large;">Developed in Python, HTML, CSS, & JavaScript using Django, Bootstrap, SQLite, and the CoinRoutes Smart Order Router API.</p>
         </div>
-
-
-
     </main>
   </div>
 </div>

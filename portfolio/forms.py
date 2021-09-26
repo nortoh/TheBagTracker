@@ -263,7 +263,7 @@ class SupportTicketForm(forms.Form):
                 'type': 'text',
                 'class': 'form-control',
                 'id': 'floatingInput',
-                'placeholder': 'Whats wrong?'
+                'placeholder': 'How can we help?'
             }
         )
     )

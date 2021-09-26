@@ -1,39 +1,66 @@
 {% load static %}
 <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"><img src="{% static 'img/logo.png' %}" class="logo" /></a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"><img src="{% static 'img/logo.png' %}" class="logo" /><p class="logo-text">The Bag Tracker</p></a>
+    <button class="menu-button" type="button" onclick="toggleMenu()">
         <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="nav flex-row">
-        <li class="nav-item">
+
+    <ul class="nav flex-row navbar-links">
+        <li id="home" class="nav-item active">
           <a class="nav-link {% if nbar == 'home' %}active{% endif %}" aria-current="page" href="/">
             <span data-feather="home"></span>
-            Home
+            <b>Home</b>
           </a>
         </li>
-        <li class="nav-item">
+        <li id="transactions" class="nav-item active">
           <a class="nav-link {% if nbar == 'transactions' %}active{% endif %}" href="/transactions/">
             <span data-feather="file"></span>
-            Transactions
+            <b>Transactions</b>
           </a>
         </li>
-        <li class="nav-item">
+        <li id="support" class="nav-item active">
           <a class="nav-link {% if nbar == 'support' %}active{% endif %}" href="/support/">
             <span data-feather="file"></span>
-            Support
+            <b>Support</b>
           </a>
         </li>
-        <li class="nav-item">
+        <li id="aboutus" class="nav-item active">
           <a class="nav-link {% if nbar == 'about' %}active{% endif %}" href="/about/">
             <span data-feather="file"></span>
-            About Us
+            <b>About Us</b>
+          </a>
+        </li>
+        <li id="signout" class="nav-item active">
+          <a class="nav-link px-3 text-muted" href="/signout/">
+            <span data-feather="file"></span>
+            <b>Sign out</b>
           </a>
         </li>
       </ul>
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-        <a class="nav-link px-3 text-danger" href="/signout/">Sign out</a>
-        </div>
-    </div>
 </header>
+<script>
+  const toggle = document.querySelector(".menu-button");
+  const home = document.getElementById("home");
+  const transactions = document.getElementById("transactions");
+  const support = document.getElementById("support");
+  const aboutus = document.getElementById("aboutus");
+  const signout = document.getElementById("signout");
+  /* Toggle mobile menu */
+  function toggleMenu() {
+    if (home.classList.contains("active")) {
+      home.classList.remove("active");  
+      transactions.classList.remove("active");
+      support.classList.remove("active");
+      aboutus.classList.remove("active");
+      signout.classList.remove("active");
+    } else {
+        home.classList.add("active");  
+        transactions.classList.add("active");
+        support.classList.add("active");
+        aboutus.classList.add("active");
+        signout.classList.add("active");
+    }
+}
+</script>
   
