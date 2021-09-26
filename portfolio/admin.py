@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Coin, Transaction, Account
+from .models import Coin, Transaction, Account, SupportTicket
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -60,8 +60,15 @@ class AccountAdmin(UserAdmin):
     # search_fields = ('username',)
     # ordering = ('id',)
 
+class SupportTicketAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user_id', 'submission_date', 'subject', 'message' )
+    list_filter = ('subject', 'message')
+    search_fields = ('id', 'user_id', 'submission_date')
+    ordering = ('id','submission_date')
+
 
 
 admin.site.register(Coin, CoinAdmin)
 admin.site.register(Transaction, TransactionAdmin)
 admin.site.register(Account, AccountAdmin)
+admin.site.register(SupportTicket, SupportTicketAdmin)

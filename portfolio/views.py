@@ -11,8 +11,8 @@ from django.core.exceptions import ValidationError
 import socket
 import json
 
-from .models import Transaction, Account, Coin
-from .forms import LoginForm, TransactionAddForm,RegisterForm
+from .models import Transaction, Account, Coin, SupportTicket
+from .forms import LoginForm, TransactionAddForm,RegisterForm, SupportTicketForm
 from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
@@ -288,4 +288,31 @@ class PortfolioView(View):
         # Template variables
         portfolio = portfolio_data
 
+        return render(request, self.template_name, locals())
+
+
+class SupportTicketView(View):
+    template_name = 'support.html'
+    form_class = SupportTicketForm
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+
+        if form.is_valid():
+            subject = request.POST['subject']
+            message = request.POST['message']
+            current_user_id = request.user.id
+            current_user = Account.objects.get(id=current_user_id)
+            print("This is the current user: " + str(current_user))
+            SupportTicket.objects.create(
+                subject=subject,
+                message=message,
+                user_id=current_user,
+            )
+
+        return render(request, self.template_name, locals())
+
+    def get(self, request):
+        form = SupportTicketForm()
         return render(request, self.template_name, locals())
