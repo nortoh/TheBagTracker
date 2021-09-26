@@ -58,12 +58,12 @@ class LogoutView(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            print('We have a user to logut')
+            print('We have a user to logout')
             logout(request)
-            return HttpResponseRedirect('/login/')
+            return HttpResponseRedirect('/signin/')
         else:
-            print('No user is logged in, redirect to /login')
-            return HttpResponseRedirect('/login/')
+            print('No user is logged in, redirect to /signin')
+            return HttpResponseRedirect('/signin/')
         
         return render(request, self.template_name, locals())
 
@@ -95,8 +95,8 @@ class HomeView(View):
     def get(self, request):
         if not request.user.is_authenticated:
             print('Someone is not logged in!')
-            print('No user is logged in, redirect to /login')
-            return HttpResponseRedirect('/login/')
+            print('No user is logged in, redirect to /signin')
+            return HttpResponseRedirect('/signin/')
         
         nbar = 'home'
 
@@ -120,8 +120,8 @@ class TransactionsView(SingleTableView):
     def get(self, request):
         if not request.user.is_authenticated:
             print('Someone is not logged in!')
-            print('No user is logged in, redirect to /login')
-            return HttpResponseRedirect('/login/')
+            print('No user is logged in, redirect to /signin')
+            return HttpResponseRedirect('/signin/')
         
         nbar = 'transactions'
 
