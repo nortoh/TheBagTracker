@@ -7,17 +7,22 @@ import threading
 import requests
 
 
-class ApiWebSocket(object):
+class ApiWebSocket(threading.Thread):
 
     def __init__(self):
+        threading.Thread.__init__(self)
         self.BASE_URL = 'https://portal.coinroutes.com/api'
         self.SOR_TOKEN = '6c634e1eacecc4801b000249287fbf923d5c8824'
+
+    def run(self, type):
+        print('Hello')
+        self.rest_call(type)
 
     def url(self, type):
         return "{}{}?token={}".format(self.BASE_URL, type, self.SOR_TOKEN)
 
-    def rest_call(self):
-        call = self.url('/currency_pairs/')
+    def rest_call(self, type):
+        call = self.url(type)
         print(f'Attempting for {call}')
 
         headers = {

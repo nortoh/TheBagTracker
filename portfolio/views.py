@@ -6,7 +6,7 @@ import django_tables2 as tables
 from django_tables2 import SingleTableView
 from websocket import create_connection, WebSocket
 from .apps import ApiWebSocket
-
+import threading
 from django.core.exceptions import ValidationError
 
 import socket
@@ -143,7 +143,9 @@ class HomeView(View):
             print('No user is logged in, redirect to /signin')
             return HttpResponseRedirect('/signin/')
 
-        ApiWebSocket().rest_call()
+        # ApiWebSocket().rest_call('/currency_pairs/')
+        # thread = threading.Thread(target=ApiWebSocket, args=('/currency_pairs/',))
+        # thread.start()
         nbar = 'home'
 
         account = Account.objects.get(
@@ -165,7 +167,6 @@ class RegisterView(View):
 
         print(str(request.POST))
         print(str(form.is_valid()))
-
 
         if form.is_valid():
             print("Valid!!!")
