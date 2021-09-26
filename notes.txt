@@ -1,6 +1,6 @@
 Home Page
-	- Login
-	- Logout
+	- Sign in
+	- Sign in
 	- Register
 Portfolio
 	- Table List Entry

@@ -8,7 +8,8 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background: #121212f2;
+  color: white;
 }
 
 .form-signin {
@@ -36,4 +37,12 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.form-floating {
+  color: black;
+}
+
+.logo { 
+  width: 200px; 
 }
