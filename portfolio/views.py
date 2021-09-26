@@ -5,11 +5,14 @@ from django.views import View
 import django_tables2 as tables
 from django_tables2 import SingleTableView
 from websocket import create_connection, WebSocket
+
+from django.core.exceptions import ValidationError
+
 import socket
 import json
 
 from .models import Transaction, Account, Coin
-from .forms import LoginForm, TransactionAddForm
+from .forms import LoginForm, TransactionAddForm,RegisterForm
 from .tables import TransactionsTable, PortfolioTable
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
@@ -111,6 +114,52 @@ class HomeView(View):
         portfolio_table = PortfolioTable(user_transactions)
 
         return render(request, self.template_name, locals())
+
+
+class RegisterView(View):
+    template_name = 'register.html'
+    form_class = RegisterForm
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        print(str(request.POST))
+        print(str(form.is_valid()))
+
+
+        if form.is_valid():
+            print("Valid!!!")
+            username = request.POST['username']
+            password = request.POST['password1']
+            confirm_password = request.POST['password2']
+            email = request.POST['email']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            birth_date = request.POST['birth_date']
+            test = Account.objects.create_user(
+                username=username,
+                password=password,
+                email=email,
+                date_of_birth=birth_date,
+                first_name=first_name,
+                last_name=last_name
+            )
+            print(str(test))
+
+        else:
+            print("Not valid!")
+            messages = form.errors
+            print(messages)
+            #return render(request, "register.html", {"messages": form.errors})
+
+
+        return render(request, self.template_name, locals())
+
+    def get(self, request):
+        form = RegisterForm()
+        return render(request, self.template_name, locals())
+
+
 
 class TransactionsView(SingleTableView):
     model = Transaction
