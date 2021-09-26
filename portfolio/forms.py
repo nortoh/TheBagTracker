@@ -192,6 +192,7 @@ class TransactionAddForm(forms.Form):
         choices=[(o.ticker, str(o)) for o in Coin.objects.all()],
         widget=forms.Select(
             attrs={
+                'type': 'list',
                 'class': 'form-select',
                 'id': 'floatingInput',
                 'placeholder': 'Username'
@@ -202,6 +203,7 @@ class TransactionAddForm(forms.Form):
     transaction_date = forms.DateField(
         widget=forms.TextInput(
             attrs={
+                'type': 'date',
                 'class': 'form-control',
                 'id': 'floatingInput',
                 'placeholder': '12/25/1996'
