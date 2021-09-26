@@ -118,6 +118,11 @@ body {
     width: 75px; 
     pointer-events: initial; 
   }
+
+  .big-logo { 
+    width: 200px; 
+    pointer-events: initial; 
+  }
   
   /*
    * Table
