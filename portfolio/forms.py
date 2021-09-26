@@ -131,6 +131,10 @@ class RegisterForm(forms.Form):
             if x.isupper():
                 result= True
                 break
+
+        if Account.objects.filter(username=self.cleaned_data['username']).exists():
+            self._errors['username'] = self.error_class([
+                'Username is already taken'])
         if len(username) < 5 or len(username) > 16:
             self._errors['username'] = self.error_class([
                 'Username needs to be between 6 and 16 characters'])

@@ -182,7 +182,8 @@ class RegisterView(View):
                 first_name=first_name,
                 last_name=last_name
             )
-            print(str(test))
+
+            return HttpResponseRedirect('/signin/')
 
         else:
             print("Not valid!")
