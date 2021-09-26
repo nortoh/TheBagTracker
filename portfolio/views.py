@@ -113,8 +113,6 @@ class Portfolio(object):
                     price = (transaction_amount * api_price) - transaction_fee
                     self.total_amount[base_pair_ticker] = self.total_amount[base_pair_ticker] - transaction_amount
 
-            # print(f'Portfolio: {json.dumps(self.total_amount)}')
-
         results = []
         for ticker, price in self.total_amount.items():
             results.append({
@@ -225,6 +223,15 @@ class TransactionsView(SingleTableView):
 
         return render(request, self.template_name, locals())
 
+class TransactionView(View):
+    template_name = 'transaction/view.html'
+
+    slug_url_kwarg = 'the_slug'
+    slug_field = 'slug'
+
+    def get(self, request):
+        return render(request, self.template_name, locals())
+
 class TransactionAddView(View):
     template_name = 'transactions/add.html'
     form_class = TransactionAddForm
@@ -240,18 +247,18 @@ class TransactionAddView(View):
 
             base_pair = request.POST['base_pair']
             quote_pair = request.POST['quote_pair']
-            # transaction_date = request.POST['transaction_date']
-            transaction_date = datetime.now()
+            date = datetime.now()
+            transaction_date = request.POST['transaction_date']
             transaction_amount = request.POST['transaction_amount']
             transaction_type = request.POST['transaction_type']
             transaction_fee = request.POST['transaction_fee']
 
             new_transaction = Transaction(
-                date=transaction_date,
+                date=date,
                 base_pair = Coin.objects.get(ticker=base_pair),
                 quote_pair = Coin.objects.get(ticker=quote_pair),
                 user_id = account,
-                transaction_date=datetime.now(),
+                transaction_date=transaction_date,
                 transaction_type = transaction_type,
                 transaction_amount = transaction_amount,
                 transaction_fee = transaction_fee
