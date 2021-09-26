@@ -194,6 +194,7 @@ class RegisterView(View):
         return render(request, self.template_name, locals())
 
     def get(self, request):
+        nbar = 'register'
         form = RegisterForm()
         return render(request, self.template_name, locals())
 
@@ -314,5 +315,13 @@ class SupportTicketView(View):
         return render(request, self.template_name, locals())
 
     def get(self, request):
+        nbar = 'support'
         form = SupportTicketForm()
+        return render(request, self.template_name, locals())
+
+class AboutUsView(View):
+    template_name = 'about_us.html'
+
+    def get(self, request):
+        nbar = 'about_us'
         return render(request, self.template_name, locals())
