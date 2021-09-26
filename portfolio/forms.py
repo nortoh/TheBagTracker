@@ -241,3 +241,25 @@ class TransactionAddForm(forms.Form):
             }
         )
     )
+
+class SupportTicketForm(forms.Form):
+    subject = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Subject'
+            }
+        )
+    )
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'type': 'text',
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Whats wrong?'
+            }
+        )
+    )

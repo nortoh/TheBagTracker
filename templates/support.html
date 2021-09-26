@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <link href="{% static 'img/logo.png' %}" rel="shortcut icon" />
     <meta name="generator" content="Hugo 0.88.1">
-    <title>The Bag Tracker - Register</title>
+    <title>The Bag Tracker - Support</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -54,73 +54,27 @@
               <a><img src="{% static 'img/logo.png' %}" class="big-logo" /></a>
             </div>
             <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h1 text-center font-weight-bold">Register</h1>
+                <a href="/" class="text-left" name="">Back</a>
+              <h1 class="h1 text-center font-weight-bold">Support Ticket</h1>
             </div>
           </div>
-        
+
         </div>
 
 
     <form class="form-group" method="post">
       {% csrf_token %}
-      <div class="mb-4">
-          <h4>Requirements:</h4>
-        <ul>
-            <li>Username needs to be between 6 and 16 characters</li>
-            <li>Password needs to be between 6 and 16 characters</li>
-            <li>Password needs to contain at least one uppercase character</li>
-        </ul>
-     </div>
-
-      <!-- Errors -->
-
-      <div>
-  	     <!-- Errors here -->
-        {% if form.errors %}
-           {% for field in form %}
-               {% for error in field.errors %}
-                  <div class="alert alert-danger">
-                       <strong>{{ error|escape }}</strong>
-                  </div>
-               {% endfor %}
-           {% endfor %}
-        {% endif %}
-      </div>
-
         <div class="form-group my-3">
-          <label class="col_form_label">Username:</label>
-          {{form.username}}
+          <label class="col_form_label">Subject:</label>
+          {{form.subject}}
         </div>
           <div class="form-group my-3">
-          <label class="col_form_label">First Name:</label>
-          {{form.first_name}}
-        </div>
-          <div class="form-group my-3">
-          <label class="col_form_label">Last Name:</label>
-          {{form.last_name}}
+          <label class="col_form_label">Message:</label>
+          {{form.message}}
         </div>
         <div class="form-group my-3">
-          <labe class="col_form_label"l>Email:</label>
-          {{form.email}}
+          <button type="submit" class="btn btn-primary form-control" name="">Submit</button>
         </div>
-          <div class="form-group my-3">
-          <label class="col_form_label"l>Birth Date:</label>
-          {{form.birth_date}}
-        </div>
-        <div class="form-group my-3">
-          <label class="col_form_label">Password:</label>
-          {{form.password1}}
-        </div>
-        <div class="form-group my-3">
-          <labe class="col_form_label"l>Confirm password:</label>
-          {{form.password2}}
-        </div>
-        <div class="form-group my-3">
-          <button type="submit" class="btn btn-primary form-control" name="register_user">Register</button>
-        </div>
-        <p>
-            Already a member? <a href="/signin">Sign in</a>
-        </p>
       </form>
     </main>
   </div>

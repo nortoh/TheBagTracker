@@ -33,3 +33,12 @@ class Transaction(models.Model):
     def __str__(self):
         return f'ID: {self.id} Date: {self.date} Base: {self.base_pair} Quote: {self.quote_pair} User: {self.user_id}'
 
+class SupportTicket(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user_id = models.ForeignKey(Account, to_field='id', on_delete=models.CASCADE, related_name='user_id')
+    submission_date = models.DateTimeField(auto_now_add=True)
+    subject = models.CharField(max_length=60)
+    message = models.TextField()
+
+
+
