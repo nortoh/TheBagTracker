@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <link href="{% static 'img/logo.png' %}" rel="shortcut icon" />
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Signin</title>
+    <title>The Bag Tracker - Sign in</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -31,8 +33,8 @@
     <main class="form-signin">
     <form action='' method='post'>
             {% csrf_token %}
-            <!-- Insert Sign In Logo Here -->
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3"><img src="{% static 'img/logo.png' %}" class="logo" /></a>
+            <h1 class="h3 mb-3 fw-normal">The Bag Tracker</h1>
 
 
             {% for field in form %}
