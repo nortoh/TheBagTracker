@@ -14,6 +14,12 @@ class TransactionsTable(tables.Table):
     def render_quote_pair(self, value):
         return format_html("<b><img width='15' height='15' src='/static/img/coins/{}.png' />&nbsp;{}</b>", value, value)
 
+    def render_transaction_price(self, value):
+        return format_html("<b>${}</b>", value)
+
+    def render_transaction_fee(self, value):
+        return format_html("<b>${}</b>", value)
+
     class Meta:
         model = Transaction
         template_name = "django_tables2/bootstrap4.html"
@@ -23,6 +29,9 @@ class PortfolioTable(tables.Table):
 
     def render_ticker(self, value):
         return format_html("<b><img width='15' height='15' src='/static/img/coins/{}.png' />&nbsp;{}</b>", value, value)
+
+    def render_price(self, value):
+        return format_html("<b>${}</b>", value)
 
     class Meta:
         model = Transaction
