@@ -143,6 +143,7 @@ class HomeView(View):
             print('No user is logged in, redirect to /signin')
             return HttpResponseRedirect('/signin/')
 
+        ApiWebSocket().rest_call()
         nbar = 'home'
 
         account = Account.objects.get(
