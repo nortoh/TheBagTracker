@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('transactions/', views.TransactionsView.as_view(), name='transactions'),
     path('transactions/add/', views.TransactionAddView.as_view(), name='add_transaction'),
+    path('transactions/<slug:slug>/', views.TransactionView.as_view(), name='view_transaction'),
     path('portfolio/', views.PortfolioView.as_view(), name='portfolio'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),

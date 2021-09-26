@@ -22,13 +22,13 @@ class Transaction(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField(verbose_name='Date')
     transaction_date = models.DateTimeField(auto_now_add=True, verbose_name='Date Added')
-    base_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='base_coin_pair')
-    quote_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='quote_coin_pair')
+    base_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='base_coin_pair', verbose_name='Base Pair')
+    quote_pair = models.ForeignKey(Coin, to_field='ticker', on_delete=models.CASCADE, related_name='quote_coin_pair', verbose_name='Quote Pair')
     user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
     transaction_types = (('BUY', 'Buy'), ('SELL','Sell'))
-    transaction_type = models.CharField(max_length=4, choices=transaction_types)
-    transaction_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    transaction_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_type = models.CharField(max_length=4, choices=transaction_types, verbose_name='Transaction Type')
+    transaction_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Transaction Amount ($)')
+    transaction_fee = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Transaction Fee ($)')
     
     def __str__(self):
         return f'ID: {self.id} Date: {self.date} Base: {self.base_pair} Quote: {self.quote_pair} User: {self.user_id}'
