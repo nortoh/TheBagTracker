@@ -5,6 +5,7 @@ from django.views import View
 import django_tables2 as tables
 from django_tables2 import SingleTableView
 from websocket import create_connection, WebSocket
+from .apps import ApiWebSocket
 
 from django.core.exceptions import ValidationError
 
@@ -141,7 +142,7 @@ class HomeView(View):
             print('Someone is not logged in!')
             print('No user is logged in, redirect to /signin')
             return HttpResponseRedirect('/signin/')
-        
+
         nbar = 'home'
 
         account = Account.objects.get(
