@@ -12,4 +12,4 @@ class PortfolioTable(tables.Table):
     class Meta:
         model = Transaction
         template_name = 'django_tables2/bootstrap4.html'
-        fields = ('date', 'base_pair', 'quote_pair', 'inserted_date', 'transaction_type', 'transaction_amount', 'transaction_fee')
+        fields = ('ticker', 'price')
